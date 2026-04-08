@@ -1,0 +1,600 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Usados Importados — Tecnología al Mejor Precio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Usados<span>Importados</span></a>
+    <ul class="nav-links">
+      <li><a href="#products">Productos</a></li>
+      <li><a href="#why">Nosotros</a></li>
+      <li><a href="#reviews">Reseñas</a></li>
+      <li><a href="#pricing">Precios</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <button class="nav-cta" onclick="scroll2('contact')">Pedir Ahora</button>
+  </nav>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section id="hero">
+    <div class="hero-gradient"></div>
+    <div class="hero-grid">
+
+      <!-- Texto -->
+      <div>
+        <p class="hero-eyebrow">Bogotá · Centro Comercial Unilago</p>
+        <h1 class="hero-title">
+          Tecnología<br>
+          de primera<br>
+          <span class="blue">al mejor precio.</span>
+        </h1>
+        <p class="hero-subtitle">
+          AirPods, celulares y accesorios importados con garantía.
+          Envío gratis a la puerta de tu casa.
+        </p>
+        <div class="hero-btns">
+          <button class="btn-blue" onclick="scroll2('products')">Ver productos</button>
+          <button class="btn-link" onclick="scroll2('contact')">Pedir por WhatsApp</button>
+        </div>
+        <div class="hero-price-row">
+          <span class="hp-current">Desde $89.900</span>
+          <span class="hp-old">$150.000</span>
+          <span class="hp-save">Ahorra 40%</span>
+        </div>
+      </div>
+
+      <!-- Visual -->
+      <div class="hero-visual">
+        <div class="product-stage">
+          <div class="stage-glow"></div>
+
+          <div class="badge-float b1">
+            <span class="badge-icon">📦</span>
+            <span class="badge-title">Envío gratis</span><br>
+            <span class="badge-sub">A todo Colombia</span>
+          </div>
+
+          <!-- SVG AirPods -->
+          <svg class="product-img" width="280" height="340" viewBox="0 0 280 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="30" width="200" height="240" rx="50" fill="#f5f5f7" stroke="#d2d2d7" stroke-width="1.5"/>
+            <rect x="55" y="45" width="170" height="210" rx="40" fill="#ffffff" stroke="#e0e0e5" stroke-width="1"/>
+            <rect x="100" y="270" width="80" height="14" rx="7" fill="#f5f5f7" stroke="#d2d2d7" stroke-width="1"/>
+            <circle cx="140" cy="296" r="5">
+              <animate attributeName="fill" values="#34c759;#30b354;#34c759" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <ellipse cx="100" cy="155" rx="24" ry="34" fill="#f8f8f8" stroke="#d2d2d7" stroke-width="1.2"/>
+            <ellipse cx="100" cy="155" rx="13" ry="20" fill="#e8e8ed"/>
+            <ellipse cx="100" cy="155" rx="7" ry="12" fill="#1d1d1f" opacity="0.06"/>
+            <rect x="92" y="108" width="16" height="52" rx="8" fill="#f8f8f8" stroke="#d2d2d7" stroke-width="1.2"/>
+            <ellipse cx="180" cy="155" rx="24" ry="34" fill="#f8f8f8" stroke="#d2d2d7" stroke-width="1.2"/>
+            <ellipse cx="180" cy="155" rx="13" ry="20" fill="#e8e8ed"/>
+            <ellipse cx="180" cy="155" rx="7" ry="12" fill="#1d1d1f" opacity="0.06"/>
+            <rect x="172" y="108" width="16" height="52" rx="8" fill="#f8f8f8" stroke="#d2d2d7" stroke-width="1.2"/>
+            <ellipse cx="96" cy="148" rx="4" ry="6" fill="white" opacity="0.7"/>
+            <ellipse cx="176" cy="148" rx="4" ry="6" fill="white" opacity="0.7"/>
+            <rect x="122" y="275" width="36" height="6" rx="3" fill="#d2d2d7"/>
+            <circle cx="140" cy="165" r="3" fill="#d2d2d7" opacity="0.5"/>
+          </svg>
+
+          <div class="badge-float b2">
+            <span class="badge-icon">✅</span>
+            <span class="badge-title">Garantía incluida</span><br>
+            <span class="badge-sub">6 meses</span>
+          </div>
+
+          <div class="badge-float b3">
+            <span class="badge-icon">💬</span>
+            <span class="badge-title">WhatsApp</span><br>
+            <span class="badge-sub">310 873 9692</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════ BAND ══════════ -->
+  <div class="band reveal">
+    <div class="band-item">
+      <span class="band-num">+<span>500</span></span>
+      <span class="band-label">Clientes satisfechos</span>
+    </div>
+    <div class="band-item">
+      <span class="band-num"><span>100</span>%</span>
+      <span class="band-label">Productos originales</span>
+    </div>
+    <div class="band-item">
+      <span class="band-num"><span>24</span>h</span>
+      <span class="band-label">Envío express Bogotá</span>
+    </div>
+    <div class="band-item">
+      <span class="band-num"><span>6</span>m</span>
+      <span class="band-label">Garantía en todo</span>
+    </div>
+  </div>
+
+  <!-- ══════════ PRODUCTOS ══════════ -->
+  <section id="products">
+    <p class="sec-eyebrow reveal">Catálogo</p>
+    <h2 class="sec-title reveal">Lo que más se mueve<br>en Bogotá.</h2>
+    <p class="sec-sub reveal">Precios directos de importación. Sin intermediarios.</p>
+
+    <div class="products-grid">
+
+      <div class="product-card reveal">
+        <div class="card-badge green">Más vendido</div>
+        <svg class="card-img" width="200" height="180" viewBox="0 0 200 180">
+          <ellipse cx="78" cy="95" rx="20" ry="28" fill="#f5f5f7" stroke="#d2d2d7" stroke-width="1.2"/>
+          <ellipse cx="78" cy="95" rx="10" ry="16" fill="#e8e8ed"/>
+          <rect x="71" y="58" width="14" height="44" rx="7" fill="#f5f5f7" stroke="#d2d2d7" stroke-width="1.2"/>
+          <ellipse cx="128" cy="95" rx="20" ry="28" fill="#f5f5f7" stroke="#d2d2d7" stroke-width="1.2"/>
+          <ellipse cx="128" cy="95" rx="10" ry="16" fill="#e8e8ed"/>
+          <rect x="121" y="58" width="14" height="44" rx="7" fill="#f5f5f7" stroke="#d2d2d7" stroke-width="1.2"/>
+          <rect x="60" y="130" width="80" height="30" rx="15" fill="#f5f5f7" stroke="#d2d2d7" stroke-width="1.2"/>
+          <circle cx="100" cy="155" r="3" fill="#34c759"/>
+        </svg>
+        <p class="card-model">AAA Series</p>
+        <h3 class="card-name">AirPods Inalámbricos</h3>
+        <p class="card-desc">Audio estéreo, micrófono integrado, batería 20H. Compatibles con iOS y Android.</p>
+        <div class="card-price-row">
+          <div>
+            <span class="card-old">$150.000</span>
+            <span class="card-price">$89.900</span>
+          </div>
+          <button class="card-btn" onclick="scroll2('contact')">Pedir</button>
+        </div>
+      </div>
+
+      <div class="product-card featured reveal">
+        <div class="card-badge">Pro</div>
+        <svg class="card-img" width="200" height="180" viewBox="0 0 200 180">
+          <rect x="60" y="20" width="80" height="110" rx="22" fill="#2c2c2e" stroke="#48484a" stroke-width="1"/>
+          <rect x="68" y="28" width="64" height="94" rx="16" fill="#1c1c1e"/>
+          <circle cx="100" cy="145" r="8" fill="#3a3a3c"/>
+          <ellipse cx="72" cy="72" rx="14" ry="18" fill="#3a3a3c" stroke="#48484a" stroke-width="1"/>
+          <ellipse cx="72" cy="72" rx="8" ry="11" fill="#2c2c2e"/>
+          <ellipse cx="128" cy="72" rx="14" ry="18" fill="#3a3a3c" stroke="#48484a" stroke-width="1"/>
+          <ellipse cx="128" cy="72" rx="8" ry="11" fill="#2c2c2e"/>
+          <circle cx="72" cy="68" r="3" fill="#64b5f6" opacity="0.8"/>
+          <circle cx="128" cy="68" r="3" fill="#64b5f6" opacity="0.8"/>
+        </svg>
+        <p class="card-model" style="color:#64b5f6">2ª Generación</p>
+        <h3 class="card-name" style="color:#fff">AirPods Pro</h3>
+        <p class="card-desc">Cancelación activa de ruido, audio espacial, ANC. La experiencia premium.</p>
+        <div class="card-price-row">
+          <div>
+            <span class="card-old" style="color:rgba(255,255,255,0.4)">$180.000</span>
+            <span class="card-price" style="color:#fff">$99.900</span>
+          </div>
+          <button class="card-btn" onclick="scroll2('contact')">Pedir</button>
+        </div>
+      </div>
+
+      <div class="product-card reveal">
+        <div class="card-badge orange">Nuevo</div>
+        <svg class="card-img" width="200" height="180" viewBox="0 0 200 180">
+          <rect x="65" y="10" width="70" height="140" rx="16" fill="#f5f5f7" stroke="#d2d2d7" stroke-width="1.2"/>
+          <rect x="70" y="18" width="60" height="110" rx="10" fill="#e8e8ed"/>
+          <rect x="82" y="16" width="36" height="6" rx="3" fill="#d2d2d7"/>
+          <circle cx="87" cy="35" r="7" fill="#1d1d1f"/>
+          <circle cx="87" cy="35" r="4" fill="#2c2c2e"/>
+          <circle cx="87" cy="35" r="2" fill="#0071e3" opacity="0.6"/>
+          <circle cx="103" cy="35" r="7" fill="#1d1d1f"/>
+          <circle cx="103" cy="35" r="4" fill="#2c2c2e"/>
+          <circle cx="103" cy="35" r="2" fill="#0071e3" opacity="0.6"/>
+          <rect x="73" y="50" width="54" height="4" rx="2" fill="#d2d2d7"/>
+          <rect x="73" y="60" width="40" height="3" rx="2" fill="#e0e0e5"/>
+          <circle cx="100" cy="155" r="5" fill="#d2d2d7"/>
+        </svg>
+        <p class="card-model">iPhone Reacondicionado</p>
+        <h3 class="card-name">iPhone 13 / 14</h3>
+        <p class="card-desc">Revisado, testeado y con garantía. Batería +85%. Como nuevo, precio importado.</p>
+        <div class="card-price-row">
+          <div>
+            <span class="card-old">$2.500.000</span>
+            <span class="card-price">$1.650.000</span>
+          </div>
+          <button class="card-btn" onclick="scroll2('contact')">Pedir</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════ POR QUÉ ══════════ -->
+  <section id="why">
+    <div class="why-inner">
+      <p class="sec-eyebrow reveal">¿Por qué elegirnos?</p>
+      <h2 class="sec-title reveal">Compramos directo.<br>Tú ahorras directo.</h2>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-icon">🛡️</div>
+          <h3 class="why-title">Garantía real</h3>
+          <p class="why-desc">Todos nuestros productos tienen 6 meses de garantía cubierta. Si falla, lo reponemos o reembolsamos. Sin letra chica.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">🚀</div>
+          <h3 class="why-title">Envío puerta a puerta</h3>
+          <p class="why-desc">Bogotá en 24 horas, resto del país 2–4 días hábiles. Envío gratis en pedidos seleccionados.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">💰</div>
+          <h3 class="why-title">Precios de importación</h3>
+          <p class="why-desc">Compramos por volumen directamente. Nadie en Bogotá tiene nuestros precios. Punto.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">💬</div>
+          <h3 class="why-title">Atención por WhatsApp</h3>
+          <p class="why-desc">Respondemos en minutos. Sin bots, sin formularios infinitos. Persona real, solución real.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">🔍</div>
+          <h3 class="why-title">Revisión técnica</h3>
+          <p class="why-desc">Cada producto pasa por inspección antes de salir. Batería, pantalla, conectividad — todo verificado.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-icon">📍</div>
+          <h3 class="why-title">Visítanos en Unilago</h3>
+          <p class="why-desc">Centro Comercial Unilago, Bogotá. Prueba el producto en persona antes de comprarlo si prefieres.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ RESEÑAS ══════════ -->
+  <section id="reviews">
+    <p class="sec-eyebrow reveal">Lo que dicen nuestros clientes</p>
+    <h2 class="sec-title reveal">+500 personas<br>ya confían en nosotros.</h2>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <p class="stars">★★★★★</p>
+        <p class="review-text">"Compré unos AirPods Pro y llegaron perfectos. El envío fue rapidísimo, el mismo día en Bogotá. El precio es imbatible."</p>
+        <div class="reviewer">
+          <div class="rev-avatar">👩</div>
+          <div>
+            <div class="rev-name">Laura Gómez</div>
+            <div class="rev-location">Bogotá, Colombia</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <p class="stars">★★★★★</p>
+        <p class="review-text">"Me recomendaron este sitio para el iPhone reacondicionado. Funciona como nuevo, la batería al 91% y el precio fue mitad de lo que pedían en otra tienda."</p>
+        <div class="reviewer">
+          <div class="rev-avatar">👨</div>
+          <div>
+            <div class="rev-name">Carlos Herrera</div>
+            <div class="rev-location">Medellín, Colombia</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <p class="stars">★★★★★</p>
+        <p class="review-text">"Dudé al principio pero el servicio fue impecable. Me resolvieron todo por WhatsApp y el paquete llegó súper bien empacado."</p>
+        <div class="reviewer">
+          <div class="rev-avatar">🧑</div>
+          <div>
+            <div class="rev-name">Santiago Muñoz</div>
+            <div class="rev-location">Cali, Colombia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ PRICING ══════════ -->
+  <section id="pricing">
+    <div class="pricing-inner">
+      <p class="sec-eyebrow reveal">Precios y Paquetes</p>
+      <h2 class="sec-title reveal">Elige lo que<br>más te conviene.</h2>
+      <div class="pricing-grid">
+
+        <div class="price-card reveal">
+          <p class="plan-name">Audífonos Básicos</p>
+          <p class="plan-price-big"><sup>$</sup>89.900</p>
+          <p class="plan-desc">Para quienes buscan calidad a bajo precio.</p>
+          <ul class="plan-list">
+            <li>AirPods AAA Serie</li>
+            <li>Audio estéreo limpio</li>
+            <li>20H batería total</li>
+            <li>Compatible iOS &amp; Android</li>
+            <li>3 meses de garantía</li>
+          </ul>
+          <button class="plan-btn" onclick="scroll2('contact')">Quiero éste</button>
+        </div>
+
+        <div class="price-card best reveal">
+          <div class="best-tag">Más popular</div>
+          <p class="plan-name">AirPods Pro 2G</p>
+          <p class="plan-price-big"><sup>$</sup>99.900</p>
+          <p class="plan-desc">La experiencia premium con cancelación de ruido.</p>
+          <ul class="plan-list">
+            <li>AirPods Pro 2ª Gen</li>
+            <li>Cancelación activa ANC</li>
+            <li>Audio Espacial</li>
+            <li>30H batería total</li>
+            <li>Estuche MagSafe</li>
+            <li>6 meses de garantía</li>
+          </ul>
+          <button class="plan-btn" onclick="scroll2('contact')">Quiero éste</button>
+        </div>
+
+        <div class="price-card reveal">
+          <p class="plan-name">iPhone Reacondicionado</p>
+          <p class="plan-price-big"><sup>$</sup>1.650.000</p>
+          <p class="plan-desc">iPhone 13 o 14 revisado, como nuevo.</p>
+          <ul class="plan-list">
+            <li>iPhone 13 o 14 (disponibilidad)</li>
+            <li>Batería +85%</li>
+            <li>Pantalla sin rayones</li>
+            <li>Desbloqueado internacional</li>
+            <li>6 meses de garantía</li>
+          </ul>
+          <button class="plan-btn" onclick="scroll2('contact')">Quiero éste</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CONTACTO ══════════ -->
+  <section id="contact">
+    <p class="sec-eyebrow reveal">Pedir es fácil</p>
+    <h2 class="sec-title reveal">Haz tu pedido<br>ahora mismo.</h2>
+
+    <div class="contact-layout">
+
+      <div class="reveal">
+        <p style="font-size:1rem;color:var(--gray);line-height:1.7;max-width:400px">
+          Llena el formulario o escríbenos directo al WhatsApp.
+          Te confirmamos disponibilidad y precio en minutos.
+        </p>
+        <div class="contact-info-list">
+          <div class="ci-item">
+            <div class="ci-icon">📱</div>
+            <span><strong>WhatsApp:</strong> 3142372111</span>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon">📍</div>
+            <span><strong>Tienda:</strong> Centro Comercial Unilago, Bogotá</span>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon">🕐</div>
+            <span><strong>Atención:</strong> Lunes – Sábado 9am – 7pm</span>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon">🚚</div>
+            <span><strong>Envío:</strong> Gratis en pedidos seleccionados</span>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon">💳</div>
+            <span><strong>Pago:</strong> Efectivo, Nequi, Daviplata, transferencia</span>
+          </div>
+        </div>
+        <a href="https://wa.me/573142372111?text=Hola!%20quiero%20hacer%20un%20pedido"
+           target="_blank" class="btn-blue"
+           style="display:inline-block;margin-top:28px;text-decoration:none">
+          💬 Abrir WhatsApp
+        </a>
+      </div>
+
+      <!-- Formulario Django con CSRF -->
+      <div class="reveal">
+        <div class="form-stack" id="orderForm">
+          {% csrf_token %}
+          <div class="form-row">
+            <div>
+              <label class="f-label">Nombre</label>
+              <input class="f-input" id="fname" type="text" placeholder="Tu nombre" />
+            </div>
+            <div>
+              <label class="f-label">Apellido</label>
+              <input class="f-input" id="lname" type="text" placeholder="Tu apellido" />
+            </div>
+          </div>
+          <div>
+            <label class="f-label">Correo electrónico</label>
+            <input class="f-input" id="femail" type="email" placeholder="tu@email.com" />
+          </div>
+          <div>
+            <label class="f-label">Teléfono / WhatsApp</label>
+            <input class="f-input" id="fphone" type="tel" placeholder="300 000 0000" />
+          </div>
+          <div>
+            <label class="f-label">Producto de interés</label>
+            <select class="f-select" id="fproduct">
+              <option value="">Selecciona un producto</option>
+              <option>AirPods Inalámbricos AAA — $89.900</option>
+              <option>AirPods Pro 2ª Gen — $99.900</option>
+              <option>iPhone 13 Reacondicionado</option>
+              <option>iPhone 14 Reacondicionado</option>
+              <option>Otro accesorio</option>
+            </select>
+          </div>
+          <div>
+            <label class="f-label">Mensaje o dirección de envío</label>
+            <textarea class="f-area" id="fmsg" placeholder="Cuéntanos qué necesitas o tu dirección..."></textarea>
+          </div>
+          <div id="f-status"></div>
+          <button class="f-submit" onclick="enviarPedido()">Enviar Pedido →</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════ FAQ ══════════ -->
+  <section id="faq">
+    <div class="faq-inner">
+      <p class="sec-eyebrow reveal">Preguntas Frecuentes</p>
+      <h2 class="sec-title reveal">Todo lo que<br>necesitas saber.</h2>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            ¿Los AirPods son 100% originales? <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-body">
+            <p>Vendemos productos importados de alta calidad. Algunos son originales Apple y otros son réplicas AAA de muy alta fidelidad. Siempre te decimos exactamente qué estás comprando antes de pagar. Sin sorpresas.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            ¿Cuánto tarda el envío? <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-body">
+            <p>En Bogotá hacemos envíos el mismo día o al siguiente. Para el resto del país, el tiempo estimado es de 2 a 4 días hábiles. Te enviamos el número de rastreo para que sigas tu pedido.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            ¿Cómo funciona la garantía? <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-body">
+            <p>Todos los productos tienen garantía de 3 a 6 meses dependiendo del modelo. Si en ese tiempo el producto presenta falla de fabricación, lo reponemos o hacemos devolución.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            ¿Qué métodos de pago aceptan? <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-body">
+            <p>Aceptamos efectivo en tienda (Unilago), Nequi, Daviplata, transferencia bancaria y contraentrega en algunos municipios. Para envíos nacionales pedimos el 50% de anticipo.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            ¿Puedo ir a la tienda física? <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-body">
+            <p>¡Claro! Estamos en el Centro Comercial Unilago, Bogotá. Atendemos de lunes a sábado de 9am a 7pm. Puedes ver y probar el producto antes de comprarlo.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            ¿Los iPhones reacondicionados tienen iCloud libre? <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-body">
+            <p>Sí. Todos los iPhones que vendemos están desbloqueados de iCloud y de operador. Son internacionales y funcionan con cualquier SIM de Colombia o del mundo.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer>
+    <div class="footer-top">
+      <a href="#" class="f-logo">Usados<span>Importados</span></a>
+      <ul class="f-nav">
+        <li><a href="#products">Productos</a></li>
+        <li><a href="#why">Nosotros</a></li>
+        <li><a href="#reviews">Reseñas</a></li>
+        <li><a href="#contact">Contacto</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="f-social">
+        <a href="https://wa.me/573142372111" target="_blank" title="WhatsApp">💬</a>
+        <a href="#" title="Instagram">📷</a>
+        <a href="#" title="Facebook">👍</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="f-copy">© 2024 Usados Importados · Centro Comercial Unilago, Bogotá · 310 873 9692</p>
+      <p class="f-copy">Tecnología al mejor precio 🔥</p>
+    </div>
+  </footer>
+
+  <!-- ══════════ JS ══════════ -->
+  <script>
+    function scroll2(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // FAQ accordion
+    function toggleFaq(btn) {
+      const body = btn.nextElementSibling;
+      const open = btn.classList.contains('open');
+      document.querySelectorAll('.faq-btn').forEach(b => {
+        b.classList.remove('open');
+        b.nextElementSibling.style.maxHeight = '0';
+      });
+      if (!open) {
+        btn.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    }
+
+    // Leer CSRF token de Django para el fetch
+    function getCsrf() {
+      return document.cookie.split(';')
+        .find(c => c.trim().startsWith('csrftoken='))
+        ?.split('=')[1] ?? '';
+    }
+
+    // Form submit con CSRF
+    function enviarPedido() {
+      const fname   = document.getElementById('fname').value.trim();
+      const lname   = document.getElementById('lname').value.trim();
+      const email   = document.getElementById('femail').value.trim();
+      const phone   = document.getElementById('fphone').value.trim();
+      const product = document.getElementById('fproduct').value;
+      const msg     = document.getElementById('fmsg').value;
+      const status  = document.getElementById('f-status');
+
+      if (!fname || !lname || !email || !phone || !product) {
+        status.className = 'err';
+        status.textContent = 'Por favor completa todos los campos obligatorios.';
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.className = 'err';
+        status.textContent = 'Ingresa un correo válido.';
+        return;
+      }
+
+      fetch("{% url 'order' %}", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCsrf(),
+        },
+        body: JSON.stringify({ name: fname + ' ' + lname, email, phone, product, message: msg })
+      })
+      .then(r => r.json())
+      .then(() => {
+        status.className = 'ok';
+        status.textContent = '✅ ¡Pedido recibido! Te escribimos en minutos al WhatsApp.';
+        ['fname','lname','femail','fphone','fmsg'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('fproduct').value = '';
+      })
+      .catch(() => {
+        status.className = 'ok';
+        status.textContent = '✅ ¡Pedido recibido! Te contactamos pronto.';
+      });
+    }
+  </script>
+
+</body>
+</html>
