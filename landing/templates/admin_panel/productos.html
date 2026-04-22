@@ -1,0 +1,86 @@
+{% extends "admin_panel/base.html" %}
+{% block title %}Inventario{% endblock %}
+{% block page_title %}Inventario{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div>
+    <h1>Inventario</h1>
+    <p>Administra tus productos y stock disponible</p>
+  </div>
+  <a href="{% url 'panel_producto_nuevo' %}" class="btn btn-primary">＋ Nuevo producto</a>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div>
+      <div class="card-title">Productos</div>
+      <div class="card-sub">{{ productos|length }} producto(s) en total</div>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Categoría</th>
+          <th>Precio</th>
+          <th>Precio anterior</th>
+          <th>Stock</th>
+          <th>Estado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in productos %}
+        <tr>
+          <td>
+            <div style="font-weight:500;color:var(--text)">{{ p.nombre }}</div>
+            {% if p.descripcion %}
+              <div style="font-size:.73rem;color:var(--text-2)">{{ p.descripcion|truncatechars:50 }}</div>
+            {% endif %}
+          </td>
+          <td class="muted">{{ p.get_categoria_display }}</td>
+          <td style="font-weight:600;color:var(--text)">${{ p.precio|floatformat:0 }}</td>
+          <td style="color:var(--text-2);text-decoration:line-through">
+            {% if p.precio_old %}${{ p.precio_old|floatformat:0 }}{% else %}—{% endif %}
+          </td>
+          <td>
+            {% if p.stock == 0 %}
+              <span class="stock-empty">{{ p.stock }} uds</span>
+            {% elif p.stock < 3 %}
+              <span class="stock-low">{{ p.stock }} uds</span>
+            {% else %}
+              <span class="stock-ok">{{ p.stock }} uds</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if p.activo %}
+              <span class="badge badge-entregado">Activo</span>
+            {% else %}
+              <span class="badge badge-cancelado">Inactivo</span>
+            {% endif %}
+          </td>
+          <td>
+            <a href="{% url 'panel_producto_editar' p.pk %}" class="btn btn-secondary btn-sm">✏️ Editar</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7">
+            <div class="empty-state">
+              <div class="empty-state-icon">🏷️</div>
+              <h3>Sin productos</h3>
+              <p>Agrega tu primer producto para empezar.</p>
+              <a href="{% url 'panel_producto_nuevo' %}" class="btn btn-primary" style="margin-top:14px">＋ Agregar producto</a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

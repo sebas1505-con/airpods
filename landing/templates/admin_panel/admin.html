@@ -1,0 +1,163 @@
+{% extends "admin_panel/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- BIENVENIDA -->
+<div style="margin-bottom:24px">
+  <h1 style="font-size:1.4rem;font-weight:700;letter-spacing:-.02em;color:var(--text)">
+    Bienvenido, {{ request.user.username }} 👋
+  </h1>
+  <p style="font-size:.83rem;color:var(--text-2);margin-top:3px">
+    Aquí tienes un resumen de tu negocio hoy.
+  </p>
+</div>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-card blue">
+    <div class="stat-icon">📦</div>
+    <div class="stat-num">{{ pedidos_nuevos }}</div>
+    <div class="stat-label">Pedidos nuevos</div>
+  </div>
+  <div class="stat-card orange">
+    <div class="stat-icon">🚚</div>
+    <div class="stat-num">{{ pedidos_enviados }}</div>
+    <div class="stat-label">Enviados</div>
+  </div>
+  <div class="stat-card green">
+    <div class="stat-icon">👥</div>
+    <div class="stat-num">{{ total_clientes }}</div>
+    <div class="stat-label">Clientes totales</div>
+  </div>
+  <div class="stat-card gray">
+    <div class="stat-icon">📋</div>
+    <div class="stat-num">{{ total_pedidos }}</div>
+    <div class="stat-label">Pedidos totales</div>
+  </div>
+</div>
+
+<!-- FILA PRINCIPAL -->
+<div style="display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start">
+
+  <!-- ÚLTIMOS PEDIDOS -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Últimos pedidos</div>
+        <div class="card-sub">Los 8 más recientes</div>
+      </div>
+      <a href="{% url 'panel_pedidos' %}" class="btn btn-secondary btn-sm">Ver todos →</a>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in ultimos_pedidos %}
+          <tr>
+            <td class="muted">#{{ p.pk }}</td>
+            <td>
+              <div style="font-weight:500">{{ p.nombre }}</div>
+              <div style="font-size:.73rem;color:var(--text-2)">{{ p.telefono }}</div>
+            </td>
+            <td class="muted">{{ p.producto_txt|truncatechars:32 }}</td>
+            <td><span class="badge badge-{{ p.estado }}">{{ p.get_estado_display }}</span></td>
+            <td class="muted" style="white-space:nowrap">{{ p.creado|date:"d/m H:i" }}</td>
+            <td>
+              <div style="display:flex;gap:6px">
+                <a href="{% url 'panel_pedido_detalle' p.pk %}" class="btn btn-secondary btn-sm">Ver</a>
+                <a href="{{ p.wa_link }}" target="_blank" class="btn btn-wa btn-sm">💬</a>
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6">
+              <div class="empty-state">
+                <div class="empty-state-icon">📭</div>
+                <h3>Sin pedidos aún</h3>
+                <p>Cuando alguien llene el formulario de la tienda aparecerá aquí.</p>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- COLUMNA DERECHA -->
+  <div style="display:flex;flex-direction:column;gap:18px">
+
+    <!-- ACCIONES RÁPIDAS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Acciones rápidas</div>
+      </div>
+      <div class="card-body" style="display:flex;flex-direction:column;gap:8px">
+        <a href="{% url 'panel_pedidos' %}?estado=nuevo" class="btn btn-primary" style="width:100%;justify-content:center">
+          📦 Ver pedidos nuevos
+          {% if pedidos_nuevos %}<span style="background:rgba(255,255,255,0.25);border-radius:20px;padding:1px 8px;font-size:.7rem">{{ pedidos_nuevos }}</span>{% endif %}
+        </a>
+        <a href="{% url 'panel_producto_nuevo' %}" class="btn btn-secondary" style="width:100%;justify-content:center">
+          ➕ Agregar producto
+        </a>
+        <a href="{% url 'panel_clientes' %}" class="btn btn-secondary" style="width:100%;justify-content:center">
+          👥 Ver clientes
+        </a>
+        <a href="/" target="_blank" class="btn btn-secondary" style="width:100%;justify-content:center">
+          🌐 Abrir tienda
+        </a>
+        <a href="https://wa.me/573142372111" target="_blank" class="btn btn-wa" style="width:100%;justify-content:center">
+          💬 WhatsApp directo
+        </a>
+      </div>
+    </div>
+
+    <!-- ESTADO DE PEDIDOS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Estado de pedidos</div>
+      </div>
+      <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
+        <a href="{% url 'panel_pedidos' %}?estado=nuevo" style="text-decoration:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--blue-l);border-radius:8px;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+            <span style="font-size:.82rem;font-weight:500;color:var(--blue)">🆕 Nuevos</span>
+            <span style="font-size:1.1rem;font-weight:700;color:var(--blue)">{{ pedidos_nuevos }}</span>
+          </div>
+        </a>
+        <a href="{% url 'panel_pedidos' %}?estado=contactado" style="text-decoration:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--yellow-l);border-radius:8px;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+            <span style="font-size:.82rem;font-weight:500;color:var(--yellow)">📞 Contactados</span>
+            <span style="font-size:1.1rem;font-weight:700;color:var(--yellow)">{{ contactados }}</span>
+          </div>
+        </a>
+        <a href="{% url 'panel_pedidos' %}?estado=enviado" style="text-decoration:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--orange-l);border-radius:8px;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+            <span style="font-size:.82rem;font-weight:500;color:var(--orange)">🚚 Enviados</span>
+            <span style="font-size:1.1rem;font-weight:700;color:var(--orange)">{{ pedidos_enviados }}</span>
+          </div>
+        </a>
+        <a href="{% url 'panel_pedidos' %}?estado=entregado" style="text-decoration:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--green-l);border-radius:8px;transition:opacity .15s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+            <span style="font-size:.82rem;font-weight:500;color:var(--green)">✅ Entregados</span>
+            <span style="font-size:1.1rem;font-weight:700;color:var(--green)">{{ entregados }}</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

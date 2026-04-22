@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -76,8 +76,15 @@ WSGI_APPLICATION = 'airpods4.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'airpods',   # nombre de tu base de datos
+        'USER': 'root',                # tu usuario de MySQL/MariaDB
+        'PASSWORD': '123456789',   # tu contraseña
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8mb4',      # soporta emojis y caracteres especiales
+        },
     }
 }
 
@@ -117,11 +124,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
  
-# Django busca estáticos en estas carpetas adicionales
+# Django busca archivos estáticos en estas carpetas
+# (además de la carpeta static/ de cada app instalada)
 STATICFILES_DIRS = [
-    BASE_DIR / "usados_importados" / "static",
+    BASE_DIR / "landing" / "static",
 ]
  
+# Solo se usa cuando corres: python manage.py collectstatic
+STATIC_ROOT = BASE_DIR / "staticfiles"
+# ──────────────────────────────────────────────────────────────
+ 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+LOGIN_URL = "/panel/login/"
+
+import os
+MEDIA_URL  = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"

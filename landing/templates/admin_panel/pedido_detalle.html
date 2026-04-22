@@ -1,0 +1,80 @@
+{% extends "admin_panel/base.html" %}
+{% block title %}Pedido #{{ pedido.pk }}{% endblock %}
+{% block page_title %}Pedido #{{ pedido.pk }}{% endblock %}
+
+{% block content %}
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start">
+
+  <!-- INFO DEL PEDIDO -->
+  <div class="card">
+    <p class="card-title">Datos del pedido</p>
+
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div>
+        <div style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Cliente</div>
+        <div style="font-weight:600;font-size:1rem">{{ pedido.nombre }}</div>
+      </div>
+      <div>
+        <div style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Teléfono</div>
+        <div style="font-size:.95rem">{{ pedido.telefono }}</div>
+      </div>
+      <div>
+        <div style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Email</div>
+        <div style="font-size:.95rem">{{ pedido.email|default:"—" }}</div>
+      </div>
+      <div>
+        <div style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Producto solicitado</div>
+        <div style="font-size:.95rem;font-weight:500">{{ pedido.producto_txt }}</div>
+      </div>
+      {% if pedido.mensaje %}
+      <div>
+        <div style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Mensaje / dirección</div>
+        <div style="font-size:.9rem;background:var(--light);padding:10px 14px;border-radius:8px;line-height:1.6">{{ pedido.mensaje }}</div>
+      </div>
+      {% endif %}
+      <div>
+        <div style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Fecha</div>
+        <div style="font-size:.9rem;color:var(--gray)">{{ pedido.creado|date:"d/m/Y H:i" }}</div>
+      </div>
+      <div>
+        <div style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Estado actual</div>
+        <span class="badge badge-{{ pedido.estado }}">{{ pedido.get_estado_display }}</span>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">
+      <a href="{{ pedido.wa_link }}" target="_blank" class="btn btn-wa">💬 Escribir por WhatsApp</a>
+      {% if pedido.email %}
+        <a href="mailto:{{ pedido.email }}" class="btn btn-ghost">✉️ Enviar email</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- FORMULARIO EDITAR ESTADO -->
+  <div>
+    <div class="card">
+      <p class="card-title">Actualizar pedido</p>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="form-label">Estado</label>
+          <select class="form-select" name="estado">
+            {% for val, label in estados %}
+              <option value="{{ val }}" {% if pedido.estado == val %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Notas internas</label>
+          <textarea class="form-textarea" name="notas_admin" placeholder="Dirección confirmada, número de guía, observaciones...">{{ pedido.notas_admin }}</textarea>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          <a href="{% url 'panel_pedidos' %}" class="btn btn-ghost">← Volver</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

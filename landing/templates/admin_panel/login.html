@@ -1,0 +1,237 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Acceder — Usados Importados</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: #f5f5f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* fondo con gradiente sutil tipo apple.com */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 20%, rgba(0,113,227,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(0,113,227,0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    /* logo arriba tipo apple */
+    .apple-logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .apple-logo-icon {
+      width: 48px; height: 48px;
+      background: #1d1d1f;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .apple-logo h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #1d1d1f;
+      margin-bottom: 4px;
+    }
+    .apple-logo p {
+      font-size: .82rem;
+      color: #86868b;
+      font-weight: 400;
+    }
+
+    /* card estilo apple — blur glass */
+    .card {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 20px;
+      padding: 36px 36px 32px;
+      box-shadow:
+        0 2px 8px rgba(0,0,0,0.04),
+        0 8px 32px rgba(0,0,0,0.08);
+    }
+
+    /* error */
+    .error-msg {
+      background: #fff2f2;
+      border: 1px solid rgba(220,38,38,0.2);
+      border-left: 3px solid #dc2626;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: .8rem;
+      color: #991b1b;
+      margin-bottom: 20px;
+    }
+
+    /* campos */
+    .field {
+      margin-bottom: 14px;
+    }
+    .field label {
+      display: block;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: #86868b;
+      margin-bottom: 6px;
+    }
+    .field input {
+      width: 100%;
+      padding: 11px 14px;
+      background: rgba(255,255,255,0.9);
+      border: 1.5px solid rgba(0,0,0,0.12);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: .95rem;
+      color: #1d1d1f;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .field input::placeholder { color: #c7c7cc; }
+    .field input:focus {
+      border-color: #0071e3;
+      box-shadow: 0 0 0 4px rgba(0,113,227,0.12);
+      background: #fff;
+    }
+
+    /* botón principal estilo apple */
+    .btn-submit {
+      width: 100%;
+      margin-top: 22px;
+      padding: 13px;
+      background: #0071e3;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: .95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .2s, transform .1s;
+      letter-spacing: -0.01em;
+    }
+    .btn-submit:hover  { background: #0077ed; }
+    .btn-submit:active { transform: scale(0.99); }
+
+    /* divider */
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 22px 0 0;
+    }
+    .divider hr { flex: 1; border: none; border-top: 1px solid rgba(0,0,0,0.08); }
+    .divider span { font-size: .72rem; color: #aeaeb2; }
+
+    /* footer */
+    .footer-note {
+      text-align: center;
+      margin-top: 24px;
+      font-size: .72rem;
+      color: #aeaeb2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .footer-note svg { opacity: .5; }
+
+    /* animación entrada */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .apple-logo { animation: fadeUp .6s ease forwards; }
+    .card       { animation: fadeUp .6s .1s ease both; }
+    .footer-note{ animation: fadeUp .6s .2s ease both; }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <!-- Logo arriba -->
+    <div class="apple-logo">
+      <div class="apple-logo-icon">🛍️</div>
+      <h2>Usados Importados</h2>
+      <p>Panel de administración</p>
+    </div>
+
+    <!-- Card -->
+    <div class="card">
+
+      {% if messages %}
+        {% for msg in messages %}
+          <div class="error-msg">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="field">
+          <label for="username">Usuario</label>
+          <input type="text" id="username" name="username"
+                 placeholder="Tu usuario" autofocus required/>
+        </div>
+
+        <div class="field">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password"
+                 placeholder="••••••••" required/>
+        </div>
+
+        <button type="submit" class="btn-submit">Iniciar sesión</button>
+
+        <div class="divider">
+          <hr/><span>acceso seguro</span><hr/>
+        </div>
+      </form>
+
+    </div>
+
+    <p class="footer-note">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0110 0v4"/>
+      </svg>
+      Solo tú tienes acceso a este panel
+    </p>
+
+  </div>
+
+</body>
+</html>

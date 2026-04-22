@@ -1,0 +1,45 @@
+{% extends "admin_panel/base.html" %}
+{% block title %}Clientes{% endblock %}
+{% block page_title %}Clientes{% endblock %}
+
+{% block content %}
+
+<form method="get" class="search-bar">
+  <input class="search-input" type="text" name="q" value="{{ buscar }}" placeholder="🔍 Buscar por nombre o teléfono..."/>
+  <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+  {% if buscar %}<a href="{% url 'panel_clientes' %}" class="btn btn-ghost btn-sm">✕</a>{% endif %}
+</form>
+
+<div class="card">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Nombre</th><th>Teléfono</th><th>Email</th><th>Ciudad</th><th>Pedidos</th><th>Desde</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for c in clientes %}
+        <tr>
+          <td style="font-weight:500">{{ c.nombre }}</td>
+          <td>{{ c.telefono }}</td>
+          <td style="color:var(--gray)">{{ c.email|default:"—" }}</td>
+          <td style="color:var(--gray)">{{ c.ciudad }}</td>
+          <td>
+            <span style="background:var(--blue-l);color:var(--blue);font-size:.75rem;font-weight:600;padding:2px 10px;border-radius:20px">
+              {{ c.num_pedidos }}
+            </span>
+          </td>
+          <td style="color:var(--gray);font-size:.78rem">{{ c.creado|date:"d/m/Y" }}</td>
+          <td>
+            {% with tel=c.telefono %}
+            <a href="https://wa.me/57{{ tel|cut:' '|cut:'+' }}" target="_blank" class="btn btn-wa btn-sm">💬 WA</a>
+            {% endwith %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7"><div class="empty"><div class="empty-icon">👥</div><div class="empty-text">No hay clientes aún</div></div></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "admin_panel/base.html" %}
+{% block title %}Pedidos{% endblock %}
+{% block page_title %}Pedidos{% endblock %}
+
+{% block content %}
+
+<form method="get" class="search-bar">
+  <input class="search-input" type="text" name="q" value="{{ buscar }}" placeholder="🔍 Buscar por nombre, tel o producto..."/>
+  <select class="filter-select" name="estado" onchange="this.form.submit()">
+    <option value="">Todos los estados</option>
+    {% for val, label in estados %}
+      <option value="{{ val }}" {% if estado == val %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit" class="btn btn-primary btn-sm">Filtrar</button>
+  {% if buscar or estado %}
+    <a href="{% url 'panel_pedidos' %}" class="btn btn-ghost btn-sm">✕ Limpiar</a>
+  {% endif %}
+</form>
+
+<div class="card">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>Cliente</th><th>Producto solicitado</th>
+          <th>Teléfono</th><th>Estado</th><th>Fecha</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in pedidos %}
+        <tr>
+          <td style="color:var(--gray);font-size:.78rem">#{{ p.pk }}</td>
+          <td>
+            <div style="font-weight:500">{{ p.nombre }}</div>
+            <div style="font-size:.75rem;color:var(--gray)">{{ p.email }}</div>
+          </td>
+          <td style="color:var(--gray)">{{ p.producto_txt|truncatechars:40 }}</td>
+          <td>{{ p.telefono }}</td>
+          <td><span class="badge badge-{{ p.estado }}">{{ p.get_estado_display }}</span></td>
+          <td style="color:var(--gray);font-size:.78rem;white-space:nowrap">{{ p.creado|date:"d/m/Y H:i" }}</td>
+          <td>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <a href="{% url 'panel_pedido_detalle' p.pk %}" class="btn btn-ghost btn-sm">✏️ Editar</a>
+              <a href="{{ p.wa_link }}" target="_blank" class="btn btn-wa btn-sm">💬 WA</a>
+            </div>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7">
+            <div class="empty">
+              <div class="empty-icon">📭</div>
+              <div class="empty-text">No hay pedidos{% if buscar %} para "{{ buscar }}"{% endif %}</div>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends "admin_panel/base.html" %}
+{% block title %}{% if producto %}Editar{% else %}Nuevo{% endif %} producto{% endblock %}
+{% block page_title %}{% if producto %}Editar: {{ producto.nombre }}{% else %}Nuevo producto{% endif %}{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div>
+    <h1>{% if producto %}Editar producto{% else %}Nuevo producto{% endif %}</h1>
+    <p>{% if producto %}Modifica los datos del producto{% else %}Agrega un nuevo producto al inventario{% endif %}</p>
+  </div>
+  <a href="{% url 'panel_productos' %}" class="btn btn-secondary">← Volver</a>
+</div>
+
+<div style="max-width:680px">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Datos del producto</div>
+    </div>
+    <div class="card-body">
+
+      <!-- enctype OBLIGATORIO para subir imágenes -->
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label class="form-label">Nombre del producto <em>*</em></label>
+          <input class="form-input" type="text" name="nombre"
+                 value="{{ producto.nombre|default:'' }}"
+                 placeholder="Ej: AirPods 4 con ANC" required/>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Categoría</label>
+            <select class="form-select" name="categoria">
+              {% for val, label in categorias %}
+                <option value="{{ val }}" {% if producto.categoria == val %}selected{% endif %}>
+                  {{ label }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stock (unidades)</label>
+            <input class="form-input" type="number" name="stock"
+                   value="{{ producto.stock|default:0 }}" min="0"/>
+            <span class="form-hint">Unidades disponibles para vender</span>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Precio COP <em>*</em></label>
+            <input class="form-input" type="number" name="precio"
+                   value="{{ producto.precio|default:'' }}"
+                   placeholder="169900" required/>
+            <span class="form-hint">Precio de venta actual</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Precio anterior (tachado)</label>
+            <input class="form-input" type="number" name="precio_old"
+                   value="{{ producto.precio_old|default:'' }}"
+                   placeholder="280000"/>
+            <span class="form-hint">Precio original antes del descuento</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Descripción</label>
+          <textarea class="form-textarea" name="descripcion"
+                    placeholder="Describe el producto: características, qué incluye...">{{ producto.descripcion|default:'' }}</textarea>
+        </div>
+
+        <!-- CAMPO IMAGEN -->
+        <div class="form-group">
+          <label class="form-label">Foto del producto</label>
+
+          {% if producto.imagen %}
+            <div style="margin-bottom:12px;display:flex;align-items:center;gap:16px">
+              <img src="{{ producto.imagen.url }}"
+                   style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid var(--border)"/>
+              <div>
+                <div style="font-size:.8rem;font-weight:500;color:var(--text)">Imagen actual</div>
+                <div style="font-size:.73rem;color:var(--text-2);margin-top:2px">Sube una nueva para reemplazarla</div>
+              </div>
+            </div>
+          {% endif %}
+
+          <input class="form-input" type="file" name="imagen"
+                 accept="image/png,image/jpeg,image/webp"
+                 style="padding:6px 11px;cursor:pointer"/>
+          <span class="form-hint">PNG, JPG o WEBP. Tamaño recomendado: 600×600px</span>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-check">
+              <input type="checkbox" name="activo"
+                     {% if not producto or producto.activo %}checked{% endif %}/>
+              <span class="form-check-label">Producto activo</span>
+            </label>
+            <span class="form-hint" style="margin-left:22px">Visible en el inventario</span>
+          </div>
+          <div class="form-group">
+            <label class="form-check">
+              <input type="checkbox" name="destacado"
+                     {% if producto.destacado %}checked{% endif %}/>
+              <span class="form-check-label">Mostrar en la tienda</span>
+            </label>
+            <span class="form-hint" style="margin-left:22px">Aparece en la landing page</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;padding-top:12px;border-top:1px solid var(--border);margin-top:4px">
+          <button type="submit" class="btn btn-primary btn-lg">
+            {% if producto %}💾 Guardar cambios{% else %}➕ Crear producto{% endif %}
+          </button>
+          <a href="{% url 'panel_productos' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
